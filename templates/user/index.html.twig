@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'user.list.title'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen bg-gradient-to-br from-[#F0D08D]/20 to-[#D36E25]/10">
+        <div class="px-4 sm:px-6 lg:px-8 py-8">
+            <div class="sm:flex sm:items-center">
+                <div class="sm:flex-auto">
+                    <h1 class="text-3xl font-bold text-[#573634]">{{ 'user.list.title'|trans }}</h1>
+                </div>
+                <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+                    <a href="{{ path('app_user_new') }}" 
+                       class="inline-flex items-center justify-center rounded-full border-2 border-[#D36E25] px-6 py-3 text-base font-medium text-white bg-[#D36E25] shadow-lg hover:bg-[#573634] hover:border-[#573634] transform hover:scale-105 transition-all duration-200">
+                        {{ 'user.new'|trans }}
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-8 flex flex-col">
+                <div class="overflow-hidden shadow-lg rounded-xl border-2 border-[#F0D08D] bg-white relative">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-[#D36E25]/5 rounded-bl-[100px]"></div>
+                    <div class="absolute bottom-0 left-0 w-24 h-24 bg-[#1B6ACC]/5 rounded-tr-[80px]"></div>
+
+                    <table class="min-w-full divide-y divide-[#F0D08D]/30">
+                        <thead class="bg-[#F0D08D]/10">
+                            <tr>
+                                <th scope="col" class="px-3 py-4 text-left text-sm font-bold text-[#573634]">{{ 'user.email'|trans }}</th>
+                                <th scope="col" class="px-3 py-4 text-left text-sm font-bold text-[#573634]">{{ 'user.firstname'|trans }}</th>
+                                <th scope="col" class="px-3 py-4 text-left text-sm font-bold text-[#573634]">{{ 'user.lastname'|trans }}</th>
+                                <th scope="col" class="px-3 py-4 text-left text-sm font-bold text-[#573634]">{{ 'user.roles'|trans }}</th>
+                                <th scope="col" class="relative py-4 pl-3 pr-4 sm:pr-6">
+                                    <span class="sr-only">Actions</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#F0D08D]/20 relative">
+                            {% for user in users %}
+                                <tr class="hover:bg-[#F0D08D]/5 transition-colors duration-200">
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-[#573634]">{{ user.email }}</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-[#573634]">{{ user.firstname }}</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-[#573634]">{{ user.lastname }}</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                        <div class="flex flex-wrap gap-2">
+                                            {% for role in user.roles %}
+                                                {% if role != 'ROLE_USER' %}
+                                                    <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium {% if role == 'ROLE_ADMIN' %}bg-[#D36E25]/20 text-[#D36E25]{% else %}bg-[#1B6ACC]/20 text-[#1B6ACC]{% endif %}">
+                                                        {{ role|replace({'ROLE_': ''})|capitalize }}
+                                                    </span>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </td>
+                                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <div class="flex justify-end gap-4">
+                                            <a href="{{ path('app_user_edit', {'id': user.id}) }}" 
+                                               class="text-[#1B6ACC] hover:text-[#D36E25] transition-colors duration-200 transform hover:scale-110"
+                                               title="{{ 'user.edit'|trans }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                </svg>
+                                            </a>
+                                            {% if 'ROLE_ADMIN' not in user.roles %}
+                                                <form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}" 
+                                                      class="inline-block" 
+                                                      onsubmit="return confirm('{{ 'user.delete_confirm'|trans }}');">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                                                    <button type="submit" 
+                                                            class="text-[#573634] hover:text-[#D36E25] transition-colors duration-200 transform hover:scale-110"
+                                                            title="{{ 'user.delete'|trans }}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

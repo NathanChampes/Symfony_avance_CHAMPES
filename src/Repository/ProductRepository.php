@@ -16,28 +16,23 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    //    /**
-    //     * @return Product[] Returns an array of Product objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function findAllOrderedByPriceDesc(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.price', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 
-    //    public function findOneBySomeField($value): ?Product
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findAllSorted(string $sort = 'name', string $direction = 'asc'): array
+    {
+        $validFields = ['name', 'price', 'stock'];
+        $sort = in_array($sort, $validFields) ? $sort : 'name';
+        $direction = strtolower($direction) === 'desc' ? 'DESC' : 'ASC';
+
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.' . $sort, $direction)
+            ->getQuery()
+            ->getResult();
+    }
 }

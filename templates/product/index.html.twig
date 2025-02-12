@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'product.list.title'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen bg-gradient-to-br from-[#F0D08D]/20 to-[#D36E25]/10">
+        <div class="px-4 sm:px-6 lg:px-8 py-8">
+            <div class="sm:flex sm:items-center mb-8">
+                <div class="sm:flex-auto">
+                    <h1 class="text-3xl font-bold text-[#573634]">{{ 'product.list.title'|trans }}</h1>
+                    <div class="mt-4 flex gap-4">
+                        <a href="{{ path('app_product_index', {sort: 'name', direction: currentSort == 'name' and currentDirection == 'asc' ? 'desc' : 'asc'}) }}" 
+                           class="px-4 py-2 text-sm rounded-full {% if currentSort == 'name' %}bg-[#D36E25] text-white{% else %}bg-[#F0D08D]/20 text-[#573634]{% endif %} hover:bg-[#D36E25] hover:text-white transition-colors">
+                            {{ 'sort.by_name'|trans }} 
+                            {% if currentSort == 'name' %}
+                                <span class="ml-1">{{ currentDirection == 'asc' ? '↑' : '↓' }}</span>
+                            {% endif %}
+                        </a>
+                        <a href="{{ path('app_product_index', {sort: 'price', direction: currentSort == 'price' and currentDirection == 'asc' ? 'desc' : 'asc'}) }}"
+                           class="px-4 py-2 text-sm rounded-full {% if currentSort == 'price' %}bg-[#D36E25] text-white{% else %}bg-[#F0D08D]/20 text-[#573634]{% endif %} hover:bg-[#D36E25] hover:text-white transition-colors">
+                            {{ 'sort.by_price'|trans }}
+                            {% if currentSort == 'price' %}
+                                <span class="ml-1">{{ currentDirection == 'asc' ? '↑' : '↓' }}</span>
+                            {% endif %}
+                        </a>
+                        <a href="{{ path('app_product_index', {sort: 'stock', direction: currentSort == 'stock' and currentDirection == 'asc' ? 'desc' : 'asc'}) }}"
+                           class="px-4 py-2 text-sm rounded-full {% if currentSort == 'stock' %}bg-[#D36E25] text-white{% else %}bg-[#F0D08D]/20 text-[#573634]{% endif %} hover:bg-[#D36E25] hover:text-white transition-colors">
+                            {{ 'sort.by_stock'|trans }}
+                            {% if currentSort == 'stock' %}
+                                <span class="ml-1">{{ currentDirection == 'asc' ? '↑' : '↓' }}</span>
+                            {% endif %}
+                        </a>
+                    </div>
+                </div>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+                        <a href="{{ path('app_product_new') }}" class="inline-flex items-center justify-center rounded-full border-2 border-[#D36E25] px-6 py-3 text-base font-medium text-white bg-[#D36E25] shadow-lg hover:bg-[#573634] hover:border-[#573634] transform hover:scale-105 transition-all duration-200 mr-4">
+                            {{ 'product.new'|trans }}
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                {% for product in products %}
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden border-2 border-[#F0D08D] transform hover:scale-105 transition-all duration-200">
+                        <div class="relative pt-[100%]">
+                            <img src="{{ asset('uploads/products/' ~ product.imageFilename) }}" 
+                                 alt="{{ product.name }}" 
+                                 class="absolute inset-0 w-full h-full object-contain p-4">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#1B1013]/5 to-transparent"></div>
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-[#F0D08D]/10 rounded-bl-[100px]"></div>
+                            <div class="absolute bottom-0 left-0 w-24 h-24 bg-[#D36E25]/10 rounded-tr-[80px]"></div>
+                        </div>
+                        <div class="p-6 relative bg-white">
+                            <div class="absolute top-0 right-0 w-16 h-16 bg-[#F0D08D]/10 rounded-bl-full -mt-6"></div>
+                            
+                            <h3 class="text-xl font-bold text-[#573634]">{{ product.name }}</h3>
+                            <p class="text-sm text-[#D36E25] mt-1">{{ product.character }}</p>
+                            <p class="text-sm text-[#573634]/70 mt-2">{{ product.description }}</p>
+                            
+                            <div class="mt-4 flex items-center justify-between">
+                                <span class="text-xl font-bold text-[#1B6ACC]">{{ product.price|number_format(2, '.', ',') }} €</span>
+                                <span class="text-sm px-3 py-1 rounded-full {% if product.stock > 10 %}bg-[#F0D08D]/20 text-[#573634]{% else %}bg-[#D36E25]/20 text-[#D36E25]{% endif %}">
+                                    Stock: {{ product.stock }}
+                                </span>
+                            </div>
+                            
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <div class="mt-4 flex justify-end gap-4">
+                                    <a href="{{ path('app_product_edit', {'id': product.id}) }}" 
+                                       class="text-[#1B6ACC] hover:text-[#D36E25] transition-colors duration-200 transform hover:scale-110"
+                                       title="{{ 'product.edit'|trans }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
+                                    </a>
+                                    <form method="post" action="{{ path('app_product_delete', {'id': product.id}) }}" 
+                                          class="inline-block" 
+                                          onsubmit="return confirm('{{ 'product.delete_confirm'|trans }}');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
+                                        <button type="submit" 
+                                                class="text-[#573634] hover:text-[#D36E25] transition-colors duration-200 transform hover:scale-110"
+                                                title="{{ 'product.delete'|trans }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="fixed bottom-4 left-20">
+                    <a href="{{ path('app_product_export') }}" 
+                       class="inline-flex items-center justify-center rounded-full border-2 border-[#1B6ACC] px-3 py-3 text-base font-medium text-white bg-[#1B6ACC] shadow-xl hover:bg-[#573634] hover:border-[#573634] transform hover:scale-105 transition-all duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

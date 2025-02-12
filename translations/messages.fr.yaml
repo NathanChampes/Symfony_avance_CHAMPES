@@ -1,0 +1,113 @@
+registration:
+  title: Rejoignez l'équipe Wallace & Gromit
+  submit: S'inscrire
+  terms: J'accepte les conditions
+  firstname: Prénom
+  lastname: Nom
+  password: Mot de passe
+  email: Adresse email
+  login: Connexion
+  back: Retour
+
+login:
+  title: Bon retour parmi nous !
+  subtitle: Le monde des peluches Wallace & Gromit vous attend
+  submit: Se connecter
+  logout: Déconnexion
+  logged_in_as: Connecté en tant que
+  forgot_password: Mot de passe oublié ?
+  register: S'inscrire
+  back: Retour
+
+form:
+  email: Adresse email
+  password: Mot de passe
+  firstname: Prénom
+  lastname: Nom
+  agree_terms: J'accepte les conditions
+
+sidebar:
+  dashboard: Tableau de bord
+  users: Utilisateurs
+  clients: Clients
+  products: Peluches
+
+header:
+  home: Accueil
+  about: Notre Histoire
+  contact: Contact
+  login: Connexion
+  register: Rejoindre
+  products: Nos Peluches
+  logout: Déconnexion
+
+home:
+  title: Wallace & Gromit - Peluches de Collection
+  welcome: Bienvenue dans l'univers
+  subtitle: Wallace & Gromit en peluche
+  description: Découvrez notre collection unique de peluches artisanales inspirées des personnages emblématiques de Wallace & Gromit. Fabriquées avec amour et attention aux détails.
+  get_started: Découvrir la collection
+
+product:
+  title: Nos Peluches
+  new: Nouvelle Peluche
+  edit: Modifier la Peluche
+  delete: Supprimer
+  character: Personnage
+  size: Taille
+  description: Description
+  price: Prix
+  stock: Stock
+  list:
+    title: Liste des produits
+  delete_confirm: Êtes-vous sûr de vouloir supprimer ce produit ?
+  name: Nom
+  created_successfully: Produit créé avec succès
+  edited_successfully: Produit mis à jour avec succès
+  deleted_successfully: Produit supprimé avec succès
+  
+
+user:
+  list:
+    title: Utilisateurs
+  new: Nouvel Utilisateur
+  edit: Modifier
+  delete: Supprimer
+  roles: Rôles
+  email: Email
+  firstname: Prénom
+  password: Mot de passe
+  lastname: Nom
+  delete_confirm: Êtes-vous sûr de vouloir supprimer cet utilisateur ?
+  roles_choice:
+    ROLE_USER: Utilisateur
+    ROLE_ADMIN: Administrateur
+    ROLE_MANAGER: Manager
+  cannot_delete_admin: Impossible de supprimer un administrateur
+  deleted_successfully: Utilisateur supprimé avec succès
+  created_successfully: Utilisateur créé avec succès
+  updated_successfully: Utilisateur mis à jour avec succès
+  cannot_remove_admin: Impossible de retirer le rôle administrateur
+  promoted_to_admin: L'utilisateur a été promu administrateur
+
+action:
+  save: Enregistrer
+  cancel: Annuler
+  back: Retour
+
+nav:
+  products: Produits
+
+choice:
+  small: Petit
+  medium: Moyen
+  large: Grand
+
+message:
+  access_denied: Désolé ! Vous n'avez pas l'autorisation d'accéder à cette page.
+  mime_type: Merci de télécharger un fichier valide.
+
+sort:
+  by_name: Trier par nom
+  by_price: Trier par prix
+  by_stock: Trier par stock

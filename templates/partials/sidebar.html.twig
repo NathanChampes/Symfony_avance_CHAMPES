@@ -1,0 +1,42 @@
+<div id="sidebar" class="w-16 hover:w-64 bg-[#1B1013] text-white fixed h-full transition-all duration-300 border-r-4 border-[#F0D08D] group" style="z-index: 50;">
+    <div class="absolute top-0 right-0 w-24 h-24 bg-[#D36E25]/10 rounded-bl-[80px]"></div>
+    <div class="absolute bottom-0 left-0 w-20 h-20 bg-[#1B6ACC]/10 rounded-tr-[60px]"></div>
+
+    <div class="py-6 px-3 group-hover:px-6 relative whitespace-nowrap overflow-hidden transition-all duration-300">
+        <div class="flex items-center mb-8 justify-center group-hover:justify-start">
+            <span class="text-2xl font-bold text-[#F0D08D] opacity-0 group-hover:opacity-100 transition-opacity duration-300">Wallace & Gromit</span>
+        </div>
+        
+        <nav class="space-y-3">
+            {% for item in [
+                {'path': 'home', 'icon': 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6', 'label': 'sidebar.dashboard'},
+                {'path': 'app_user_index', 'icon': 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z', 'label': 'sidebar.users', 'role': 'ROLE_ADMIN'},
+                {'path': 'app_product_index', 'icon': 'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4', 'label': 'sidebar.products'}
+            ] %}
+                {% if not item.role is defined or is_granted(item.role) %}
+                    <a href="{{ path(item.path) }}" 
+                       class="flex items-center p-3 text-[#F0D08D]/80 rounded-lg hover:bg-[#573634] {% if app.request.get('_route') starts with item.path %}bg-[#573634]{% endif %} transition-all duration-200 transform hover:scale-105 group-hover:hover:translate-x-2 border-2 border-transparent hover:border-[#F0D08D]/20">
+                        <div class="flex justify-center group-hover:justify-start w-full">
+                            <svg class="w-6 h-6 group-hover:w-5 group-hover:h-5 group-hover:mr-3 flex-shrink-0 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ item.icon }}"/>
+                            </svg>
+                            <span class="absolute left-full ml-3 opacity-0 group-hover:static group-hover:ml-0 group-hover:opacity-100 transition-all duration-300">{{ item.label|trans }}</span>
+                        </div>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </nav>
+    </div>
+
+    <div class="absolute bottom-0 w-full px-3 py-4 group-hover:px-6 group-hover:py-6 border-t-2 border-[#F0D08D]/20 bg-[#1B1013]/80 backdrop-blur-sm transition-all duration-300">
+        <div class="flex items-center justify-center group-hover:justify-between overflow-hidden">
+            <div class="flex items-center">
+                <span class="text-sm text-[#F0D08D] opacity-0 group-hover:opacity-100 transition-opacity duration-300">{{ app.user.firstname }} {{ app.user.lastname }}</span>
+            </div>
+            <a href="{{ path('app_logout') }}" 
+               class="text-sm text-[#F0D08D]/80 hover:text-[#D36E25] transition-all duration-200 transform hover:scale-105">
+                <span class="hidden group-hover:inline">{{ 'header.logout'|trans }}</span>
+            </a>
+        </div>
+    </div>
+</div>

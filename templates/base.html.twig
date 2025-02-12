@@ -2,16 +2,43 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <title>{% block title %}{% endblock %}</title>
         {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
         {% endblock %}
 
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {% block importmap %}{% endblock %}
+            <script src="{{ asset('js/notifications.js') }}"></script>
+            <script src="{{ asset('js/sidebar.js') }}"></script>
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="bg-[#F0D08D]/10">
+        {% include 'utility/notification.html.twig' %}
+        <div class="fixed bottom-4 right-4 flex gap-3 p-2 bg-white/30 backdrop-blur-sm rounded-full border-2 border-[#F0D08D] shadow-lg" style="z-index: 1000;">
+            <a href="{{ path('change_locale', {'locale': 'fr'}) }}" 
+               class="w-10 h-10 flex items-center justify-center text-sm font-medium rounded-full transition-all duration-200 transform hover:scale-110 {% if app.request.locale == 'fr' %}bg-[#D36E25] text-white border-2 border-[#D36E25]{% else %}bg-white text-[#573634] border-2 border-[#F0D08D] hover:bg-[#F0D08D]/10 hover:border-[#D36E25] hover:text-[#D36E25]{% endif %}">
+                FR
+            </a>
+            <a href="{{ path('change_locale', {'locale': 'en'}) }}" 
+               class="w-10 h-10 flex items-center justify-center text-sm font-medium rounded-full transition-all duration-200 transform hover:scale-110 {% if app.request.locale == 'en' %}bg-[#D36E25] text-white border-2 border-[#D36E25]{% else %}bg-white text-[#573634] border-2 border-[#F0D08D] hover:bg-[#F0D08D]/10 hover:border-[#D36E25] hover:text-[#D36E25]{% endif %}">
+                EN
+            </a>
+        </div>
+
+        <div class="flex min-h-screen">
+            {% if app.user %}
+                {% include 'partials/sidebar.html.twig' %}
+            {% endif %}
+            
+            <div id="main-content" class="flex-1 transition-all duration-300 {% if app.user %}ml-16{% endif %}">
+                {% if not app.user and app.request.get('_route') == 'home' %}
+                    {% include 'partials/header.html.twig' %}
+                {% endif %}
+                <main>
+                    {% block body %}{% endblock %}
+                </main>
+            </div>
+        </div>
     </body>
 </html>

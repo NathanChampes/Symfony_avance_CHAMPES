@@ -1,0 +1,22 @@
+<div class="flex">
+    <div class="{% if app.user %}ml-64{% endif %} flex-1">
+        <nav class="absolute top-0 left-0 right-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16 items-center">
+                    <div class="flex">
+                        <div class="flex-shrink-0 flex items-center">
+                            <a href="{{ path('home') }}" class="text-2xl font-bold text-white hover:text-[#F0D08D] transition-colors">
+                                Wallace & Gromit
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <a href="{{ path('app_login') }}" class="px-4 py-2 text-white hover:text-[#F0D08D] transition-colors border-2 border-white hover:border-[#F0D08D] rounded-lg">
+                            {{ 'header.login'|trans }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
