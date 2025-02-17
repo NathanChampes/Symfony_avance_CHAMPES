@@ -25,6 +25,8 @@ form:
   firstname: Prénom
   lastname: Nom
   agree_terms: J'accepte les conditions
+  phone: Téléphone
+  address: Adresse
 
 sidebar:
   dashboard: Tableau de bord
@@ -47,6 +49,7 @@ home:
   subtitle: Wallace & Gromit en peluche
   description: Découvrez notre collection unique de peluches artisanales inspirées des personnages emblématiques de Wallace & Gromit. Fabriquées avec amour et attention aux détails.
   get_started: Découvrir la collection
+  discover: Nos peluches les plus populaires
 
 product:
   title: Nos Peluches
@@ -65,7 +68,6 @@ product:
   created_successfully: Produit créé avec succès
   edited_successfully: Produit mis à jour avec succès
   deleted_successfully: Produit supprimé avec succès
-  
 
 user:
   list:
@@ -111,3 +113,14 @@ sort:
   by_name: Trier par nom
   by_price: Trier par prix
   by_stock: Trier par stock
+
+client:
+  new: Nouveau Client
+  created_successfully: Client créé avec succès
+  edit: Modifier le Client
+  edited_successfully: Client mis à jour avec succès
+  
+error:
+  oops: Oups ! Page non trouvée
+  home: Retourner à l'accueil
+  description: Il semblerait que Wallace & Gromit aient égaré cette page quelque part sur la lune... 

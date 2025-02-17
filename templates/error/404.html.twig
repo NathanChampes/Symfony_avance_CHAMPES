@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page non trouvée{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen bg-gradient-to-br from-[#F0D08D]/20 to-[#D36E25]/10 flex items-center justify-center px-4 py-12">
+        <div class="max-w-xl w-full space-y-8 text-center">
+            <div class="relative">
+                <div class="absolute inset-0 flex items-center justify-center opacity-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-96 h-96 text-[#573634]">
+                        <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                    </svg>
+                </div>
+                
+                <div class="relative z-10">
+                    <h1 class="text-9xl font-bold text-[#573634]">404</h1>
+                    <h2 class="mt-4 text-3xl font-extrabold text-[#D36E25]">{{'error.oops'|trans}}</h2>
+                    <p class="mt-4 text-lg text-[#573634]">
+                        {{'error.description'|trans}}
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-8 space-y-4">
+                <a href="{{ path('home') }}" 
+                   class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-[#D36E25] hover:bg-[#573634] transform hover:scale-105 transition-all duration-200">
+                    {{'error.home'|trans}}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

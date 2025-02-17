@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'sidebar.clients'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen bg-gradient-to-br from-[#F0D08D]/20 to-[#D36E25]/10">
+        <div class="px-4 sm:px-6 lg:px-8 py-8">
+            <div class="sm:flex sm:items-center">
+                <div class="sm:flex-auto">
+                    <h1 class="text-3xl font-bold text-[#573634]">{{ 'sidebar.clients'|trans }}</h1>
+                </div>
+                <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+                    <a href="{{ path('app_client_new') }}" 
+                       class="inline-flex items-center justify-center rounded-full border-2 border-[#D36E25] px-6 py-3 text-base font-medium text-white bg-[#D36E25] shadow-lg hover:bg-[#573634] hover:border-[#573634] transform hover:scale-105 transition-all duration-200">
+                        {{ 'client.new'|trans }}
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-8 flex flex-col">
+                <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-300">
+                                <thead class="bg-[#1B1013]">
+                                    <tr>
+                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-[#F0D08D]">{{ 'user.firstname'|trans }}</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-[#F0D08D]">{{ 'user.lastname'|trans }}</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-[#F0D08D]">{{ 'user.email'|trans }}</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-[#F0D08D]">{{ 'form.phone'|trans }}</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-[#F0D08D]">{{ 'form.address'|trans }}</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-[#F0D08D]"></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 bg-white">
+                                    {% for client in clients %}
+                                        <tr>
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-[#573634]">{{ client.firstname }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-[#573634]">{{ client.lastname }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-[#573634]">{{ client.email }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-[#573634]">{{ client.phoneNumber }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-[#573634]">{{ client.address }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                                <a href="{{ path('app_client_edit', {'id': client.id}) }}" 
+                                                   class="text-[#D36E25] hover:text-[#573634]">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                    </svg>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

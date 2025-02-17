@@ -29,7 +29,7 @@
                         </div>
                         {% if is_granted('ROLE_ADMIN') %}
                         <div class="rounded-md shadow">
-                            <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-[#F0D08D] text-base font-medium rounded-md text-[#F0D08D] bg-transparent hover:bg-[#1B1013]/50 md:py-4 md:text-lg md:px-10">
+                            <a href="{{ path('app_product_new')}}" class="w-full flex items-center justify-center px-8 py-3 border border-[#F0D08D] text-base font-medium rounded-md text-[#F0D08D] bg-transparent hover:bg-[#1B1013]/50 md:py-4 md:text-lg md:px-10">
                                 {{ 'product.new'|trans }}
                             </a>
                         </div>
@@ -37,9 +37,28 @@
                     </div>
                 </div>
                 <div class="mt-16">
-                    <h2 class="text-2xl font-bold text-center mb-8 text-white">Nos peluches les plus populaires</h2>
+                    <h2 class="text-2xl font-bold text-center mb-8 text-white">{{'home.discover'|trans}}</h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <!-- la c'est pour les produits à la une  -->
+                        {% for product in featuredProducts %}
+                            <div class="bg-white/10 backdrop-blur-md rounded-xl shadow-lg overflow-hidden border-2 border-[#F0D08D]/30 transform hover:scale-105 transition-all duration-200">
+                                <div class="relative pt-[100%]">
+                                    <img src="{{ asset('uploads/products/' ~ product.imageFilename) }}" 
+                                         alt="{{ product.name }}" 
+                                         class="absolute inset-0 w-full h-full object-contain p-4">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold text-[#F0D08D]">{{ product.name }}</h3>
+                                    <p class="text-sm text-white/80 mt-2">{{ product.description }}</p>
+                                    <div class="mt-4 flex items-center justify-between">
+                                        <span class="text-xl font-bold text-[#F0D08D]">{{ product.price|number_format(2, '.', ',') }} €</span>
+                                        <span class="text-sm px-3 py-1 rounded-full {% if product.stock > 10 %}bg-[#F0D08D]/20 text-[#F0D08D]{% else %}bg-[#D36E25]/20 text-[#D36E25]{% endif %}">
+                                            Stock: {{ product.stock }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

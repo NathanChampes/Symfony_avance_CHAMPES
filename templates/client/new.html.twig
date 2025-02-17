@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'client.new'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen bg-gradient-to-br from-[#F0D08D]/20 to-[#D36E25]/10 py-6">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl rounded-[2rem] border-4 border-[#F0D08D] relative">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-[#D36E25]/10 rounded-bl-[100px]"></div>
+                <div class="absolute bottom-0 left-0 w-28 h-28 bg-[#1B6ACC]/10 rounded-tr-[80px]"></div>
+                <div class="absolute top-20 left-0 w-16 h-16 bg-[#F0D08D]/20 rounded-br-full"></div>
+
+                <div class="p-8 relative">
+                    <div class="mb-8 flex items-center">
+                        <div class="p-3 bg-[#F0D08D]/20 rounded-full mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#573634]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                            </svg>
+                        </div>
+                        <h1 class="text-3xl font-bold text-[#573634]">{{ 'client.new'|trans }}</h1>
+                    </div>
+
+                    {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+                        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
+                            {% for field in ['firstname', 'lastname', 'email', 'phoneNumber', 'address'] %}
+                                <div class="relative group {% if field == 'address' %}sm:col-span-2{% endif %}">
+                                    {{ form_label(attribute(form, field), null, {
+                                        'label_attr': {'class': 'block text-sm font-medium text-[#573634] mb-2'}
+                                    }) }}
+                                    <div class="relative">
+                                        {{ form_widget(attribute(form, field), {
+                                            'attr': {
+                                                'class': 'block w-full px-4 py-3 rounded-xl border-2 border-[#F0D08D] bg-white/50 text-[#1B1013] placeholder-[#573634]/50 focus:border-[#D36E25] focus:ring focus:ring-[#D36E25]/20 focus:outline-none transition-all duration-200'
+                                            }
+                                        }) }}
+                                        <div class="absolute inset-0 border-2 border-transparent group-hover:border-[#D36E25]/20 rounded-xl pointer-events-none transition-all duration-200"></div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="flex justify-end gap-4 pt-6">
+                            <a href="{{ path('app_client_index') }}" 
+                               class="px-6 py-3 text-sm font-medium text-[#573634] bg-white border-2 border-[#F0D08D] rounded-full shadow-md hover:bg-[#F0D08D]/10 transform hover:scale-105 transition-all duration-200">
+                                {{ 'action.cancel'|trans }}
+                            </a>
+                            <button type="submit" 
+                                    class="px-6 py-3 text-sm font-medium text-white bg-[#D36E25] border-2 border-[#D36E25] rounded-full shadow-md hover:bg-[#573634] hover:border-[#573634] transform hover:scale-105 transition-all duration-200">
+                                {{ 'action.save'|trans }}
+                            </button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

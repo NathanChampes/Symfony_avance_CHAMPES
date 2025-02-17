@@ -47,7 +47,8 @@ home:
   subtitle: Wallace & Gromit plush toys
   description: Discover our unique collection of handcrafted plush toys inspired by the iconic characters of Wallace & Gromit. Made with love and attention to detail.
   get_started: Discover the collection
-
+  discover: Our most popular plush toys
+  
 product:
   title: Our Plush Toys
   new: New Plush Toy
@@ -110,3 +111,14 @@ sort:
   by_name: Sort by name
   by_price: Sort by price
   by_stock: Sort by stock
+
+client:
+  new: New Client
+  created_successfully: Client created successfully
+  edit: Edit Client
+  edited_successfully: Client updated successfully
+
+error:
+  oops: Oops ! Page not found
+  home: Go back to home page
+  description: It seems that Wallace & Gromit have lost this page somewhere on the moon...
