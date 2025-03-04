@@ -53,7 +53,7 @@ class ImportProductsCommand extends Command
 
         //ça c'est pour sauter la première ligne (header)
         fgetcsv($handle);
-        
+
         $imported = 0;
         while (($data = fgetcsv($handle)) !== false) {
             // J'ai ajouté plus de possibilité par rapport à la consigne car je veux que ce soit fonctionnel avant tout :)
@@ -68,7 +68,7 @@ class ImportProductsCommand extends Command
                 // Le seul problème avec ça c'est que du coup ça ne gère pas
                 // l'upload donc ça part du principe que les images ont déjà été uploads
                 $img = $product->setImageFilename($data[6] ?? "");
-                
+
                 $this->entityManager->persist($product);
                 $imported++;
             }

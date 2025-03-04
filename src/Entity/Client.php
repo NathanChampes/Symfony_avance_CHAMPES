@@ -18,16 +18,24 @@ class Client
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max: 255)]
+    //En gros cette regex me permet d'être sur de ce qu'il rentre
+    #[Assert\Regex(pattern: '/^[a-zA-ZÀ-ÿ\s\-]+$/', message: 'This field cannot contain special characters.')]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max: 255)]
+    //En gros cette regex me permet d'être sur de ce qu'il rentre
+    #[Assert\Regex(pattern: '/^[a-zA-ZÀ-ÿ\s\-]+$/', message: 'This field cannot contain special characters.')]
     private ?string $lastname = null;
 
-    #[ORM\Column(length: 255)]
+
+    // La je met unique pour être sur que aucun autre client a la même email
+    #[ORM\Column(length: 255, unique: true)]
     #[Assert\NotBlank]
     #[Assert\Email]
+    # Bah la c'est une regex pour être sur que c'est bien un email qui est entré
+    #[Assert\Regex(pattern: '/^[\w\.-]+@[\w\.-]+\.\w+$/', message: 'This field must be a valid email address.')]
     private ?string $email = null;
 
     #[ORM\Column(type: Types::TEXT)]

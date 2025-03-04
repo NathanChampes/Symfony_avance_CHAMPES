@@ -118,9 +118,9 @@ client:
   new: Nouveau Client
   created_successfully: Client créé avec succès
   edit: Modifier le Client
-  edited_successfully: Client mis à jour avec succès
-  
+  updated_successfully: Client mis à jour avec succès
+
 error:
   oops: Oups ! Page non trouvée
   home: Retourner à l'accueil
-  description: Il semblerait que Wallace & Gromit aient égaré cette page quelque part sur la lune... 
+  description: Il semblerait que Wallace & Gromit aient égaré cette page quelque part sur la lune...

@@ -48,7 +48,7 @@ home:
   description: Discover our unique collection of handcrafted plush toys inspired by the iconic characters of Wallace & Gromit. Made with love and attention to detail.
   get_started: Discover the collection
   discover: Our most popular plush toys
-  
+
 product:
   title: Our Plush Toys
   new: New Plush Toy
@@ -83,7 +83,7 @@ user:
     ROLE_USER: User
     ROLE_ADMIN: Administrator
     ROLE_MANAGER: Manager
-  cannot_delete_admin:  Cannot delete an administrator
+  cannot_delete_admin: Cannot delete an administrator
   deleted_successfully: User deleted successfully
   created_successfully: User created successfully
   updated_successfully: User updated successfully
@@ -105,7 +105,7 @@ choice:
 
 message:
   access_denied: Sorry! You don't have permission to access this page.
-  mime_type: Please upload a valid file. 
+  mime_type: Please upload a valid file.
 
 sort:
   by_name: Sort by name
@@ -116,7 +116,7 @@ client:
   new: New Client
   created_successfully: Client created successfully
   edit: Edit Client
-  edited_successfully: Client updated successfully
+  updated_successfully: Client updated successfully
 
 error:
   oops: Oops ! Page not found
